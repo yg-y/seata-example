@@ -6,22 +6,25 @@ import io.seata.rm.datasource.DataSourceProxy;
 import io.seata.spring.annotation.GlobalTransactionScanner;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.util.StringUtils;
 
 import javax.sql.DataSource;
 
 /**
- * @Author: heshouyou
- * @Description  seata global configuration
- * @Date Created in 2019/1/24 10:28
+ * alibaba seata 配置类
  */
 @Configuration
 public class SeataAutoConfig {
+
+    @Value("${spring.application.name}")
+    String applicationName;
 
     /**
      * autowired datasource config
@@ -36,7 +39,7 @@ public class SeataAutoConfig {
      */
     @Primary
     @Bean("druidDataSource")
-    public DruidDataSource druidDataSource(){
+    public DruidDataSource druidDataSource() {
         DruidDataSource druidDataSource = new DruidDataSource();
         druidDataSource.setUrl(dataSourceProperties.getUrl());
         druidDataSource.setUsername(dataSourceProperties.getUsername());
@@ -60,11 +63,12 @@ public class SeataAutoConfig {
 
     /**
      * init datasource proxy
+     *
      * @Param: druidDataSource  datasource bean instance
      * @Return: DataSourceProxy  datasource proxy
      */
     @Bean
-    public DataSourceProxy dataSourceProxy(DruidDataSource druidDataSource){
+    public DataSourceProxy dataSourceProxy(DruidDataSource druidDataSource) {
         return new DataSourceProxy(druidDataSource);
     }
 
@@ -73,6 +77,12 @@ public class SeataAutoConfig {
         return new DataSourceTransactionManager(dataSourceProxy);
     }
 
+    /**
+     * mybatis plus 需要加上此配置，否则无法使用 mybatis plus
+     *
+     * @param dataSource
+     * @return
+     */
     @Bean
     @ConfigurationProperties(prefix = "mybatis")
     public MybatisSqlSessionFactoryBean sqlSessionFactoryBean(@Qualifier("druidDataSource") DataSource dataSource) {
@@ -88,7 +98,10 @@ public class SeataAutoConfig {
      * @Return: GlobalTransactionScanner
      */
     @Bean
-    public GlobalTransactionScanner globalTransactionScanner(){
-        return new GlobalTransactionScanner("seata-order", "my_test_tx_group");
+    public GlobalTransactionScanner globalTransactionScanner() throws Exception {
+        if (StringUtils.hasText(applicationName)) {
+            return new GlobalTransactionScanner(applicationName, "my_test_tx_group");
+        }
+        throw new Exception("SeataAutoConfig initialization fail, msg: application name is empty");
     }
 }
