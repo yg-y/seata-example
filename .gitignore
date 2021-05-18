@@ -1,0 +1,4 @@
+# Project exclude paths
+/seata-core/target/
+/seata-generator/target/
+/seata-order/target/
