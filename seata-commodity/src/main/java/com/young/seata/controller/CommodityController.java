@@ -31,7 +31,7 @@ public class CommodityController {
      * @return
      */
     @PostMapping("/add")
-    public String addCommodity(@RequestBody Commodity commodity) {
+    public String addCommodity(@RequestBody Commodity commodity) throws Exception {
         return iCommodityService.addCommodity(commodity);
     }
 

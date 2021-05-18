@@ -4,6 +4,7 @@ import com.alibaba.druid.pool.DruidDataSource;
 import com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean;
 import io.seata.rm.datasource.DataSourceProxy;
 import io.seata.spring.annotation.GlobalTransactionScanner;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -20,6 +21,7 @@ import javax.sql.DataSource;
 /**
  * alibaba seata 配置类
  */
+@Slf4j
 @Configuration
 public class SeataAutoConfig {
 
@@ -100,6 +102,7 @@ public class SeataAutoConfig {
     @Bean
     public GlobalTransactionScanner globalTransactionScanner() throws Exception {
         if (StringUtils.hasText(applicationName)) {
+            log.info("class: SeataAutoConfig , init GlobalTransactionScanner, application id : {}", applicationName);
             return new GlobalTransactionScanner(applicationName, "my_test_tx_group");
         }
         throw new Exception("SeataAutoConfig initialization fail, msg: application name is empty");

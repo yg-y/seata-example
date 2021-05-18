@@ -13,5 +13,5 @@ import com.young.seata.entity.Commodity;
  */
 public interface ICommodityService extends IService<Commodity> {
 
-    String addCommodity(Commodity commodity);
+    String addCommodity(Commodity commodity) throws Exception;
 }

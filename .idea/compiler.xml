@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="seata-core" />
+        <module name="seata-generator" />
+        <module name="seata-stock" />
+        <module name="seata-order" />
+        <module name="seata-api" />
+        <module name="seata-commodity" />
+        <module name="seata-feign" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel target="8" />
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="seata-api" options="-parameters" />
+      <module name="seata-commodity" options="-parameters" />
+      <module name="seata-core" options="-parameters" />
+      <module name="seata-feign" options="-parameters" />
+      <module name="seata-generator" options="-parameters" />
+      <module name="seata-order" options="-parameters" />
+      <module name="seata-stock" options="-parameters" />
+    </option>
+  </component>
+</project>

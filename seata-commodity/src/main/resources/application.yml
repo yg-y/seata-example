@@ -2,6 +2,10 @@ server:
   port: 5052
 
 spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: www.blogyg.cn:8848
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -66,9 +70,21 @@ mybatis-plus:
   configuration:
     map-underscore-to-camel-case: true
     cache-enabled: false
-
+#feign的配置，连接超时及读取超时配置
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 5000 #连接超时
+        readTimeout: 5000 #读取超时
+        loggerLevel: basic #日志等级
+  okhttp:
+    enabled: true
+  hystrix:
+    enabled: true
 #logging
 logging:
   level:
     com.young.seata.order.mapper: debug
+    com.xt.open.jmall.product.remote.feignclients.CartFeignClient: debug
 
