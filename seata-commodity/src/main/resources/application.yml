@@ -122,11 +122,11 @@ seata:
       password: "nacos"
   config:
     type: file
-#    nacos:
-#      namespace: ""
-#      serverAddr: nacos.blogyg.cn:9999
-#      group: DEFAULT_GROUP
-#      username: "nacos"
-#      password: "nacos"
+    nacos:
+      namespace: ""
+      serverAddr: nacos.blogyg.cn:9999
+      group: DEFAULT_GROUP
+      username: "nacos"
+      password: "nacos"
 
 
