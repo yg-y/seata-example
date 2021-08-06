@@ -5,7 +5,7 @@ spring:
   cloud:
     nacos:
       discovery:
-        server-addr: www.blogyg.cn:8848
+        server-addr: www.blogyg.cn:9999
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -70,6 +70,28 @@ mybatis-plus:
   configuration:
     map-underscore-to-camel-case: true
     cache-enabled: false
+seata:
+  enabled: true
+  application-id: seata-order
+  tx-service-group: my_test_tx_group
+  enable-auto-data-source-proxy: true
+  config:
+    type: nacos
+    nacos:
+      namespace: 328477ba-e979-45a6-857d-57db69c5d8af
+      serverAddr: www.blogyg.cn:9999
+      group: DEFAULT_GROUP
+      username: "nacos"
+      password: "nacos"
+  registry:
+    type: nacos
+    nacos:
+      application: seata-server
+      server-addr: www.blogyg.cn:9999
+      group: DEFAULT_GROUP
+      namespace: 328477ba-e979-45a6-857d-57db69c5d8af
+      username: "nacos"
+      password: "nacos"
 
 #logging
 logging:

@@ -99,12 +99,13 @@ public class SeataAutoConfig {
      *
      * @Return: GlobalTransactionScanner
      */
-    @Bean
-    public GlobalTransactionScanner globalTransactionScanner() throws Exception {
-        if (StringUtils.hasText(applicationName)) {
-            log.info("class: SeataAutoConfig , init GlobalTransactionScanner, application id : {}", applicationName);
-            return new GlobalTransactionScanner(applicationName, "my_test_tx_group");
-        }
-        throw new Exception("SeataAutoConfig initialization fail, msg: application name is empty");
-    }
+//    @Bean
+//    public GlobalTransactionScanner globalTransactionScanner() throws Exception {
+//        if (StringUtils.hasText(applicationName)) {
+//            log.info("class: SeataAutoConfig , init GlobalTransactionScanner, application id : {}", applicationName);
+//            return new GlobalTransactionScanner(applicationName, "my_test_tx_group");
+//        }
+//        throw new Exception("SeataAutoConfig initialization fail, msg: application name is empty");
+//    }
+
 }

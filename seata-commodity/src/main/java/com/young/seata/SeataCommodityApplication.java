@@ -15,5 +15,4 @@ public class SeataCommodityApplication {
     public static void main(String[] args) {
         SpringApplication.run(SeataCommodityApplication.class, args);
     }
-
 }
