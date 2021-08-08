@@ -78,3 +78,34 @@ logging:
   level:
     com.young.seata.order.mapper: debug
 
+seata:
+  enabled: true
+  application-id: seata-api
+  tx-service-group: my_test_tx_group
+  enable-auto-data-source-proxy: true
+  service:
+    vgroupMapping:
+      my_test_tx_group: api
+      # 	仅注册中心为file时使用
+    grouplist:
+      api: 127.0.0.1:8091
+    enable-degrade: false
+    disable-global-transaction: false
+  registry:
+    type: file
+    nacos:
+      application: seata-commodity
+      serverAddr: nacos.blogyg.cn:9999
+      group: "DEFAULT_GROUP"
+      namespace: ""
+      username: "nacos"
+      password: "nacos"
+  config:
+    type: file
+    nacos:
+      namespace: ""
+      serverAddr: nacos.blogyg.cn:9999
+      group: DEFAULT_GROUP
+      username: "nacos"
+      password: "nacos"
+
