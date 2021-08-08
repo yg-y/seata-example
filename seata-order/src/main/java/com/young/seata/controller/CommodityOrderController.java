@@ -35,7 +35,7 @@ public class CommodityOrderController {
         order.setBuyTime(System.currentTimeMillis());
         order.setCreateTime(order.getBuyTime());
         order.setUpdateTime(order.getBuyTime());
-        Thread.sleep(10000);
+//        Thread.sleep(10000);
         iCommodityOrderService.save(order);
         log.info("class: CommodityOrderController , method : save , msg: run is ....");
 

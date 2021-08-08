@@ -6,6 +6,15 @@ spring:
     nacos:
       discovery:
         server-addr: www.blogyg.cn:9999
+        username: "nacos"
+        password: "nacos"
+      config:
+        server-addr: www.blogyg.cn:9999
+        username: "nacos"
+        password: "nacos"
+    alibaba:
+      seata:
+        tx-service-group: my_test_tx_group
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -70,31 +79,54 @@ mybatis-plus:
   configuration:
     map-underscore-to-camel-case: true
     cache-enabled: false
+#feign的配置，连接超时及读取超时配置
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 5000 #连接超时
+        readTimeout: 5000 #读取超时
+        loggerLevel: basic #日志等级
+  okhttp:
+    enabled: true
+  hystrix:
+    enabled: true
+#logging
+logging:
+  level:
+    com.young.seata.order.mapper: debug
+    com.xt.open.jmall.product.remote.feignclients.CartFeignClient: debug
+
+
 seata:
   enabled: true
   application-id: seata-order
   tx-service-group: my_test_tx_group
   enable-auto-data-source-proxy: true
-  config:
-    type: nacos
-    nacos:
-      namespace: 328477ba-e979-45a6-857d-57db69c5d8af
-      serverAddr: www.blogyg.cn:9999
-      group: DEFAULT_GROUP
-      username: "nacos"
-      password: "nacos"
+  service:
+    vgroupMapping:
+      my_test_tx_group: order
+      # 	仅注册中心为file时使用
+    grouplist:
+      order: 127.0.0.1:8091
+    enable-degrade: false
+    disable-global-transaction: false
   registry:
-    type: nacos
+    type: file
     nacos:
-      application: seata-server
-      server-addr: www.blogyg.cn:9999
-      group: DEFAULT_GROUP
-      namespace: 328477ba-e979-45a6-857d-57db69c5d8af
+      application: seata-commodity
+      serverAddr: nacos.blogyg.cn:9999
+      group: "DEFAULT_GROUP"
+      namespace: ""
       username: "nacos"
       password: "nacos"
+  config:
+    type: file
+#    nacos:
+#      namespace: ""
+#      serverAddr: nacos.blogyg.cn:9999
+#      group: DEFAULT_GROUP
+#      username: "nacos"
+#      password: "nacos"
 
-#logging
-logging:
-  level:
-    com.young.seata.order.mapper: debug
 

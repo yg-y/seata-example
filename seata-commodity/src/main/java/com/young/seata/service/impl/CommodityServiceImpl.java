@@ -30,8 +30,7 @@ public class CommodityServiceImpl extends ServiceImpl<CommodityMapper, Commodity
     CommodityMapper commodityMapper;
 
     @Override
-    @GlobalTransactional
-    @Transactional
+//    @GlobalTransactional
     public String addCommodity(Commodity commodity) throws Exception {
         commodity.setCreateTime(System.currentTimeMillis());
         commodity.setUpdateTime(commodity.getCreateTime());

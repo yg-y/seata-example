@@ -84,8 +84,8 @@ feign:
   client:
     config:
       default:
-        connectTimeout: 5000 #连接超时
-        readTimeout: 5000 #读取超时
+        connectTimeout: 5000000 #连接超时
+        readTimeout: 5000000 #读取超时
         loggerLevel: basic #日志等级
   okhttp:
     enabled: true
