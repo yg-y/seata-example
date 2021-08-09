@@ -1,7 +1,7 @@
 package com.young.seata.commodity.mapper;
 
-import com.young.seata.commodity.entity.Commodity;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.young.seata.commodity.entity.Commodity;
 
 /**
  * <p>

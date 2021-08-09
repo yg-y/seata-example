@@ -1,0 +1,18 @@
+server:
+  port: 5051
+
+spring:
+  application:
+    name: seata-order
+  cloud:
+    nacos:
+      discovery:
+        server-addr: www.blogyg.cn:9999
+        username: "nacos"
+        password: "nacos"
+      config:
+        server-addr: www.blogyg.cn:9999
+        username: "nacos"
+        password: "nacos"
+
+

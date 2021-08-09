@@ -1,9 +1,9 @@
 package com.young.seata.commodity.service.impl;
 
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.young.seata.commodity.entity.Commodity;
 import com.young.seata.commodity.mapper.CommodityMapper;
 import com.young.seata.commodity.service.ICommodityService;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
 /**

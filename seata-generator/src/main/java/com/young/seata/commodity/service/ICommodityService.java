@@ -1,7 +1,7 @@
 package com.young.seata.commodity.service;
 
-import com.young.seata.commodity.entity.Commodity;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.young.seata.commodity.entity.Commodity;
 
 /**
  * <p>

@@ -68,8 +68,8 @@ spring:
     client:
       config:
         default:
-          connectTimeout: 5000 #连接超时
-          readTimeout: 5000 #读取超时
+          connectTimeout: 5000000 #连接超时
+          readTimeout: 5000000 #读取超时
           loggerLevel: basic #日志等级
     okhttp:
       enabled: true
@@ -88,7 +88,7 @@ seata:
     type: nacos
     nacos:
       namespace: ""
-      server-addr: nacos.blogyg.cn:9999
+      server-addr: "nacos.blogyg.cn:9999"
       group: "DEFAULT_GROUP"
       username: "nacos"
       password: "nacos"
@@ -96,8 +96,8 @@ seata:
   registry:
     type: nacos
     nacos:
-      application: seata-server
-      server-addr: nacos.blogyg.cn:9999
+      application: "seata-server"
+      server-addr: "nacos.blogyg.cn:9999"
       group : "DEFAULT_GROUP"
       namespace: ""
       username: "nacos"
