@@ -3,6 +3,7 @@ package com.young.seata.controller;
 
 import com.young.seata.entity.CommodityOrder;
 import com.young.seata.service.ICommodityOrderService;
+import io.seata.tm.api.GlobalTransactionContext;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -35,7 +36,10 @@ public class CommodityOrderController {
         order.setBuyTime(System.currentTimeMillis());
         order.setCreateTime(order.getBuyTime());
         order.setUpdateTime(order.getBuyTime());
-//        Thread.sleep(10000);
+        String xid = GlobalTransactionContext.getCurrentOrCreate().getXid();
+        log.info("seata-order GlobalTransactional XID :{}",xid);
+//        int i = 1/0;
+//        Thread.sleep(1000);
         iCommodityOrderService.save(order);
         log.info("class: CommodityOrderController , method : save , msg: run is ....");
 
