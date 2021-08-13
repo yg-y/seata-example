@@ -68,8 +68,8 @@ spring:
     client:
       config:
         default:
-          connectTimeout: 50000 #连接超时
-          readTimeout: 50000 #读取超时
+          connectTimeout: 500000 #连接超时
+          readTimeout: 500000 #读取超时
           loggerLevel: basic #日志等级
     okhttp:
       enabled: true
@@ -103,3 +103,8 @@ seata:
       username: "nacos"
       password: "nacos"
       cluster: DEFAULT
+
+#logging
+logging:
+  level:
+    com.young.seata.mapper: debug

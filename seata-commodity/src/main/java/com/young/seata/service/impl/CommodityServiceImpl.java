@@ -32,17 +32,19 @@ public class CommodityServiceImpl extends ServiceImpl<CommodityMapper, Commodity
     CommodityMapper commodityMapper;
 
     @Override
-//    @GlobalTransactional
+    @GlobalTransactional
     @Transactional
     public String addCommodity(Commodity commodity) throws Exception {
         commodity.setCreateTime(System.currentTimeMillis());
         commodity.setUpdateTime(commodity.getCreateTime());
         String xid = GlobalTransactionContext.getCurrentOrCreate().getXid();
         log.info("seata-commodity GlobalTransactional XID :{}",xid);
-        // feign
-        orderServiceFeign.save();
+
         // save
         commodityMapper.insert(commodity);
+        // feign
+        orderServiceFeign.save();
+
         log.info("class: CommodityServiceImpl , method : addCommodity , msg: run is ....");
         return "success";
     }

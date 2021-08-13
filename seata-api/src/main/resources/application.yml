@@ -4,3 +4,65 @@ logging:
   level:
     com.young.seata.order.mapper: debug
 
+  gateway:
+    #忽略大小写
+    discovery:
+      locator:
+        lower-case-service-id: true
+    #路由匹配，注意格式缩进，否则会报错
+    routes:
+      - id: seata-commodity
+        uri: lb://seata-commodity
+        #predicates可以指定匹配规则
+        #Weight 代表路由分发的权重
+        Weight: 1
+        predicates:
+          - Path=/com/**
+        # 限流过滤配置
+        filters:
+          # 转发到对应服务时去掉第一个宏,最多5个字符，超过会报404
+          - StripPrefix=1
+          - name: RequestRateLimiter
+            args:
+              #redis-rate-limiter.replenishRate：允许用户每秒处理多少个请求
+              redis-rate-limiter.replenishRate: 90
+              #redis-rate-limiter.burstCapacity：令牌桶的容量，允许在一秒钟内完成的最大请求数
+              redis-rate-limiter.burstCapacity: 90
+              #key-resolver：使用SpEL按名称引用bean
+              key-resolver: "#{@ipKeyResolver}"
+          # 熔断降级配置
+          - name: Hystrix
+            args:
+              name: default
+              fallbackUri: 'forward:/defaultfallback'
+        # hystrix 信号量隔离，6秒后自动超时
+      - id: seata-order
+        uri: lb://seata-order
+        #predicates可以指定匹配规则
+        #Weight 代表路由分发的权重
+        predicates:
+          - Path=/ord/**
+        # 限流过滤配置
+        filters:
+          - StripPrefix=1
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          strategy: SEMAPHORE
+          thread:
+            timeoutInMilliseconds: 6000
+  shareSecurityContext: true
+
+management:
+  endpoint:
+    health:
+      show-details: ALWAYS
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+
+

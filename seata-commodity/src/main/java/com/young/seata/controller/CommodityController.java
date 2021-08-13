@@ -3,6 +3,7 @@ package com.young.seata.controller;
 
 import com.young.seata.entity.Commodity;
 import com.young.seata.service.ICommodityService;
+import io.seata.spring.annotation.GlobalTransactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -30,6 +31,7 @@ public class CommodityController {
      * @param commodity
      * @return
      */
+
     @PostMapping("/add")
     public String addCommodity(@RequestBody Commodity commodity) throws Exception {
         return iCommodityService.addCommodity(commodity);

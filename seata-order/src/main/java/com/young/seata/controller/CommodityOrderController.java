@@ -38,9 +38,9 @@ public class CommodityOrderController {
         order.setUpdateTime(order.getBuyTime());
         String xid = GlobalTransactionContext.getCurrentOrCreate().getXid();
         log.info("seata-order GlobalTransactional XID :{}",xid);
-//        int i = 1/0;
 //        Thread.sleep(1000);
         iCommodityOrderService.save(order);
+        int i = 1/0;
         log.info("class: CommodityOrderController , method : save , msg: run is ....");
 
         return "success";

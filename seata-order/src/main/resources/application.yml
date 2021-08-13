@@ -89,5 +89,5 @@ seata:
 #logging
 logging:
   level:
-    com.young.seata.order.mapper: debug
+    com.young.seata.mapper: debug
 
